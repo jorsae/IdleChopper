@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Model.Upgrades
+namespace Model.Items
 {
-    public abstract class BaseUpgrade : IUpgrade
+    public abstract class BaseItem : IUpgrade
     {
         private String _Name;
         public string Name { get => _Name; set => _Name = value; }
@@ -22,7 +22,7 @@ namespace Model.Upgrades
         private AttackType _DamageType;
         public AttackType DamageType { get => _DamageType; set => _DamageType = value; }
 
-        protected BaseUpgrade(string name, double basecost, double baseDamage)
+        protected BaseItem(string name, double basecost, double baseDamage)
         {
             Name = name;
             Basecost = basecost;

@@ -1,4 +1,4 @@
-﻿namespace Model.Upgrades
+﻿namespace Model.Items
 {
     public enum AttackType
     {

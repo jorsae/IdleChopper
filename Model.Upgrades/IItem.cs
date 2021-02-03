@@ -1,6 +1,6 @@
-﻿namespace Model.Upgrades
+﻿namespace Model.Items
 {
-    public interface IUpgrade
+    public interface IItem
     {
         double GetSinglePurchaseCost();
         double GetBulkPurchaseCost(double quantity);

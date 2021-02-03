@@ -1,4 +1,4 @@
-using Model.Upgrades;
+using Model.Items;
 using NUnit.Framework;
 
 namespace IdleChopper.Tests

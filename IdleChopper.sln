@@ -7,9 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdleChopper.Android", "Idle
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdleChopper", "IdleChopper\IdleChopper\IdleChopper.csproj", "{DF0AD67B-42BB-4F6E-BFDB-697835453971}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdleChopper.Tests", "IdleChopper.Tests\IdleChopper.Tests.csproj", "{725AD9ED-92BA-4AA0-B0ED-7398E79EDDCD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdleChopper.Tests", "IdleChopper.Tests\IdleChopper.Tests.csproj", "{725AD9ED-92BA-4AA0-B0ED-7398E79EDDCD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model.Upgrades", "Model.Upgrades\Model.Upgrades.csproj", "{C7A5DED5-5CEE-4316-97D6-7B35C35457E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model.Items", "Model.Upgrades\Model.Items.csproj", "{C7A5DED5-5CEE-4316-97D6-7B35C35457E0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

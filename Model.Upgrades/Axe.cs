@@ -1,6 +1,6 @@
-﻿namespace Model.Upgrades
+﻿namespace Model.Items
 {
-    public class Axe : BaseUpgrade
+    public class Axe : BaseItem
     {
         public Axe() : base("Axe", 10, 1)
         {
