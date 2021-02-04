@@ -8,6 +8,9 @@ namespace IdleChopper.TestConsole
         static void Main(string[] args)
         {
             Axe axe = new Axe();
+
+            Console.WriteLine("SINGLE");
+
             axe.Quantity = 0;
             Console.WriteLine(axe.GetSinglePurchaseCost());
             axe.Quantity = 1;
@@ -20,6 +23,15 @@ namespace IdleChopper.TestConsole
             Console.WriteLine(axe.GetSinglePurchaseCost());
             axe.Quantity = 3500;
             Console.WriteLine(axe.GetSinglePurchaseCost());
+
+            Console.WriteLine("BULK");
+
+            axe.Quantity = 0;
+            Console.WriteLine(axe.GetBulkPurchaseCost(3));
+            Console.WriteLine(axe.GetBulkPurchaseCost(30));
+            Console.WriteLine(axe.GetBulkPurchaseCost(300));
+            Console.WriteLine(axe.GetBulkPurchaseCost(1000));
+            Console.WriteLine(axe.GetBulkPurchaseCost(3500));
 
             Console.ReadLine();
         }

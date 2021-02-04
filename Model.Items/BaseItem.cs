@@ -60,10 +60,17 @@ namespace Model.Items
 
         public virtual BigInteger GetBulkPurchaseCost(int quantity)
         {
-            //double pow = (Math.Pow(Multiplier, quantity) - 1) / (Multiplier - 1);
-            //var (numerator, denominator) = Fraction(pow);
-            //return GetSinglePurchaseCost() * numerator / denominator;
-            return 0;
+            BigInteger singleCost = GetSinglePurchaseCost();
+            double exponent = (Math.Pow(Multiplier, quantity) - 1) / (Multiplier - 1);
+            if (double.IsInfinity(exponent))
+            {
+                BigInteger exp = (BigInteger) ((Math.Pow(Multiplier, quantity) - 1) / (Multiplier - 1));
+                return singleCost * exp;
+            }
+            double result = (double)singleCost * exponent;
+            if (double.IsInfinity(result))
+                return singleCost * (BigInteger)exponent;
+            return (BigInteger)result;
         }
 
         public virtual BigInteger GetMaxNumberOfUpgrades(BigInteger coins)
