@@ -73,14 +73,18 @@ namespace Model.Items
             return (BigInteger)result;
         }
 
-        public virtual BigInteger GetMaxNumberOfUpgrades(BigInteger coins)
+        public virtual int GetMaxNumberOfUpgrades(BigInteger coins)
         {
             BigInteger singleCost = GetSinglePurchaseCost();
             if (singleCost > coins)
                 return 0;
-            
-            //return Math.Log(1 + ((Multiplier - 1) * coins / singleCost) / Math.Log(Multiplier));
-            return 0;
+
+            double c2 = (double)coins / (double)singleCost;
+            //BigInteger c = coins / singleCost;
+
+            double a = Math.Log(1 + ((Multiplier - 1) * c2)) / Math.Log(Multiplier);
+
+            return (int)a;
         }
 
         private (BigInteger numerator, BigInteger denominator) Fraction(decimal value)

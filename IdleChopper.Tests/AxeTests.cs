@@ -64,5 +64,25 @@ namespace IdleChopper.Tests
                 yield return new TestCaseData(1000, 1, BigInteger.Parse("151791008917224557334459102746421581946977288927921672848952007191408232500297728"));
             }
         }
+
+        [TestCaseSource("Should_GetMaxNumberOfUpgrades_TestCases")]
+        public void Should_GetMaxNumberOfUpgrades(int currentQuantity, BigInteger coins, int expectedQuantity)
+        {
+            axe.Quantity = currentQuantity;
+            int quantity = axe.GetMaxNumberOfUpgrades(coins);
+            Assert.AreEqual(expectedQuantity, quantity);
+        }
+
+        public static IEnumerable<TestCaseData> Should_GetMaxNumberOfUpgrades_TestCases
+        {
+            get
+            {
+                yield return new TestCaseData(0, new BigInteger(10), 1);
+                yield return new TestCaseData(0, new BigInteger(22), 2);
+                yield return new TestCaseData(0, BigInteger.Parse("758955044586123049953024685125074654529955653815689161482498537329819298278932480"), 1000);
+                yield return new TestCaseData(0, BigInteger.Parse("681288676978691148728082796730674028301123951974160207737070785378216534869805658357096617687335714635916588313853179371753899606511243514356337130774501406983294646184484285207787090088080010840244661210927462648396636320732536696640767612319339805216474698808068712113318658048"), 3499);
+                yield return new TestCaseData(1000, BigInteger.Parse("151791008917224571334459102746421581946977288927921672848952009191408232500297728"), 1);
+            }
+        }
     }
 }
