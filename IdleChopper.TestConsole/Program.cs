@@ -18,6 +18,8 @@ namespace IdleChopper.TestConsole
             Console.WriteLine(axe.GetSinglePurchaseCost());
             axe.Quantity = 1000;
             Console.WriteLine(axe.GetSinglePurchaseCost());
+            axe.Quantity = 3500;
+            Console.WriteLine(axe.GetSinglePurchaseCost());
 
             Console.ReadLine();
         }
