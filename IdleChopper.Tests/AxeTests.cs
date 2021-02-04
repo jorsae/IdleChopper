@@ -1,5 +1,6 @@
 using Model.Items;
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Numerics;
 
@@ -32,7 +33,7 @@ namespace IdleChopper.Tests
                 yield return new TestCaseData(2, new BigInteger(14));
                 yield return new TestCaseData(10, new BigInteger(61));
                 yield return new TestCaseData(50, new BigInteger(91004));
-                yield return new TestCaseData(5555, new BigInteger(91004));
+                yield return new TestCaseData(1000, BigInteger.Parse("151791008917224570498495561316069919186730749386725712710838932260047139249510400"));
             }
         }
 

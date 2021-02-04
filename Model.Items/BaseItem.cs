@@ -36,17 +36,34 @@ namespace Model.Items
 
         public virtual BigInteger GetSinglePurchaseCost()
         {
-            double pow = Math.Pow(Multiplier, Quantity);
-            var (numerator, denominator) = Fraction(pow);
-            return Basecost * numerator / denominator;
-            //return initialCost * Math.pow(costBase, currentCount + 1);
+            BigInteger numerator, denominator, totalCost;
+            double dPow = Math.Pow(Multiplier, Quantity);
+            if (dPow > (double)decimal.MaxValue)
+            {
+                BigInteger maxDecimal = new BigInteger(decimal.MaxValue);
+                BigInteger pow = new BigInteger(Math.Ceiling(Math.Pow(Multiplier, Quantity)));
+
+                if (pow >= maxDecimal)
+                    (numerator, denominator) = Fraction(decimal.MaxValue);
+
+                BigInteger counts = pow / maxDecimal;
+                BigInteger remainder = pow % maxDecimal;
+                totalCost = Basecost * numerator / denominator;
+                totalCost *= counts;
+
+                dPow = (double)remainder;
+            }
+            var (num, den) = Fraction((decimal)dPow);
+
+            return totalCost + (Basecost * num / den);
         }
 
         public virtual BigInteger GetBulkPurchaseCost(int quantity)
         {
-            double pow = (Math.Pow(Multiplier, quantity) - 1) / (Multiplier - 1);
-            var (numerator, denominator) = Fraction(pow);
-            return GetSinglePurchaseCost() * numerator / denominator;
+            //double pow = (Math.Pow(Multiplier, quantity) - 1) / (Multiplier - 1);
+            //var (numerator, denominator) = Fraction(pow);
+            //return GetSinglePurchaseCost() * numerator / denominator;
+            return 0;
         }
 
         public virtual BigInteger GetMaxNumberOfUpgrades(BigInteger coins)
@@ -55,18 +72,13 @@ namespace Model.Items
             if (singleCost > coins)
                 return 0;
             
-            
             //return Math.Log(1 + ((Multiplier - 1) * coins / singleCost) / Math.Log(Multiplier));
             return 0;
         }
 
-        private (BigInteger numerator, BigInteger denominator) Fraction(double value)
+        private (BigInteger numerator, BigInteger denominator) Fraction(decimal value)
         {
-            //long longValue = BitConverter.DoubleToInt64Bits(value);
-            //char[] a = longValue.ToString().ToCharArray();
-            //long[] bits = a.Select(item => (long)item).ToArray();
-            Decimal d = (Decimal)value;
-            int[] bits = decimal.GetBits(d);
+            int[] bits = decimal.GetBits(value);
             BigInteger numerator = (1 - ((bits[3] >> 30) & 2)) *
                                    unchecked(((BigInteger)(uint)bits[2] << 64) |
                                              ((BigInteger)(uint)bits[1] << 32) |
