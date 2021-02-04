@@ -56,14 +56,12 @@ namespace IdleChopper.Tests
                 yield return new TestCaseData(0, 10, new BigInteger(259));
                 yield return new TestCaseData(0, 1000, BigInteger.Parse("758955044586123049953024685125074654529955653815689161482498537329819298278932480"));
                 yield return new TestCaseData(0, 3500, BigInteger.Parse("681288676978691148728082796730674028301123951974160207737070785378216534869805658357096617687335714635916588313853179371753899606511243514356337130774501406983294646184484285207787090088080010840244661210927462648396636320732536696640767612319339805216474698808068712113318658048"));
-                /*
+                
                 yield return new TestCaseData(1, 1, new BigInteger(12));
-                yield return new TestCaseData(1, 3, new BigInteger(43));
                 yield return new TestCaseData(2, 1, new BigInteger(14));
-                yield return new TestCaseData(50, 50, new BigInteger(4140426347));
-                yield return new TestCaseData(50, 100, new BigInteger(6906823441888125));
-                yield return new TestCaseData(50, 1000, new BigInteger(6906823441888125));
-                */
+                yield return new TestCaseData(10, 10, new BigInteger(1583));
+
+                yield return new TestCaseData(1000, 1, BigInteger.Parse("151791008917224557334459102746421581946977288927921672848952007191408232500297728"));
             }
         }
     }
