@@ -2,6 +2,7 @@
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Timers;
 using Xamarin.Forms;
 
 namespace IdleChopper.Views
@@ -9,6 +10,7 @@ namespace IdleChopper.Views
     public partial class GamePageViewModel : ContentPage, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+        private Timer GameTick = new Timer(100);
 
         private double _Logs;
         public double Logs
@@ -26,6 +28,12 @@ namespace IdleChopper.Views
         public GamePageViewModel()
         {
             LogClickCommand = new Command(LogClickCommandClicked);
+            GameTick.Elapsed += GameTick_Elapsed;
+        }
+
+        private void GameTick_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            Console.WriteLine("GameTick_Elapsed");
         }
 
         private void LogClickCommandClicked(object obj)

@@ -4,14 +4,24 @@
              x:Class="IdleChopper.Views.GamePage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <StackLayout Orientation="Horizontal" >
+                <Label Text="Coins: "/>
+                <Label Text="{x:Binding Coins, Mode=OneWay, UpdateSourceEventName=PropertyChanged}"/>
+            </StackLayout>
 
-            <Label HorizontalOptions="Center" Text="{x:Binding Logs, Mode=OneWay, UpdateSourceEventName=PropertyChanged}"/>
-            <!--<Label HorizontalOptions="Center" Text="{x:Binding Coins, Mode=OneWay, UpdateSourceEventName=PropertyChanged}"/>-->
-            
-            <Button VerticalOptions="Center" Text="Coins +1" Command="{x:Binding LogClickCommand, Mode=OneWay}"/>
+            <StackLayout Orientation="Horizontal" >
+                <Label Text="Logs: "/>
+                <Label Text="{x:Binding Logs, Mode=OneWay, UpdateSourceEventName=PropertyChanged}"/>
+            </StackLayout>
+
+            <Button Text="Logs +1"
+                    VerticalOptions="CenterAndExpand" 
+                    HorizontalOptions="CenterAndExpand"
+                    Command="{x:Binding LogClickCommand, Mode=OneWay}"/>
+
+            <Button Text="Buy Axe" 
+                    Command="{x:Binding BuyAxeCommand, Mode=OneWay}"
+                    />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
