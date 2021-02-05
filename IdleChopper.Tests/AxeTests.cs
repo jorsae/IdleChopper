@@ -64,15 +64,15 @@ namespace IdleChopper.Tests
             }
         }
 
-        [TestCaseSource("Should_GetMaxNumberOfUpgrades_TestCases")]
-        public void Should_GetMaxNumberOfUpgrades(int currentQuantity, BigInteger coins, int expectedQuantity)
+        [TestCaseSource("Should_GetMaxNumberOfItems_TestCases")]
+        public void Should_GetMaxNumberOfItems(int currentQuantity, BigInteger coins, int expectedQuantity)
         {
             axe.Quantity = currentQuantity;
-            int quantity = axe.GetMaxNumberOfUpgrades(coins);
+            int quantity = axe.GetMaxNumberOfItems(coins);
             Assert.AreEqual(expectedQuantity, quantity);
         }
 
-        public static IEnumerable<TestCaseData> Should_GetMaxNumberOfUpgrades_TestCases
+        public static IEnumerable<TestCaseData> Should_GetMaxNumberOfItems_TestCases
         {
             get
             {
@@ -83,5 +83,6 @@ namespace IdleChopper.Tests
                 yield return new TestCaseData(1000, BigInteger.Parse("151791008917224571334459102746421581946977288927921672848952009191408232500297728"), 1);
             }
         }
+
     }
 }

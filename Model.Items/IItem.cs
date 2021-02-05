@@ -6,6 +6,6 @@ namespace Model.Items
     {
         BigInteger GetSinglePurchaseCost();
         BigInteger GetBulkPurchaseCost(int quantity);
-        int GetMaxNumberOfUpgrades(BigInteger coins);
+        int GetMaxNumberOfItems(BigInteger coins);
     }
 }

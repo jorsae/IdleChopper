@@ -1,5 +1,6 @@
 ﻿using Model.Items;
 using System;
+using System.Collections.Generic;
 using System.Numerics;
 
 namespace IdleChopper.TestConsole
@@ -7,6 +8,32 @@ namespace IdleChopper.TestConsole
     class Program
     {
         static void Main(string[] args)
+        {
+            Axe axe = new Axe();
+            WoodTruck woodTruck = new WoodTruck();
+
+            Dictionary<string, BaseItem> Items = new Dictionary<string, BaseItem>
+            {
+                { axe.Name, axe },
+                { woodTruck.Name, woodTruck }
+            };
+
+            foreach(var (itemName, item) in Items)
+            {
+                if(item is BaseClickItem)
+                {
+                    Console.WriteLine($"ClickItem {itemName}: {item.BaseDamage}");
+                }
+                if(item is BaseIdleItem)
+                {
+                    Console.WriteLine($"IdleItem  {itemName}: {item.BaseDamage}");
+                }
+            }
+
+            Console.WriteLine(Items["Axe"].GetType());
+        }
+
+        static void CostTest()
         {
             Axe axe = new Axe();
 
@@ -48,11 +75,11 @@ namespace IdleChopper.TestConsole
                     last = (int)bb;
                 }
             }*/
-            
+
             // gives: 3491
             var a = BigInteger.Parse("136257735395738206916230857132054495467738500388519925987579237134927067594822540123299578662898971488458888141718917660855980181499274705892151186640131293106780597478445797069488995027849045461384947263439926910057522403726781384359193699518138427738260802625783491747255423200");
             //Console.WriteLine($"{axe.GetMaxNumberOfUpgrades(a)}");
-            
+
             var a2 = BigInteger.Parse("681288676978691148728082796730674028301123951974160207737070785378216534869805658357096617687335714635916588313853179371753899606511243514356337130774501406983294646184484285207787090088080010840244661210927462648396636320732536696640767612319339805216474698808068712113318658048");
             //Console.WriteLine($"{axe.GetMaxNumberOfUpgrades(a2)}");
 
@@ -60,9 +87,9 @@ namespace IdleChopper.TestConsole
             axe.Quantity = 1000;
             while (true)
             {
-                int bb = axe.GetMaxNumberOfUpgrades(iterator);
+                int bb = axe.GetMaxNumberOfItems(iterator);
                 Console.WriteLine($"{bb}: {iterator}");
-                if(bb == 1)
+                if (bb == 1)
                 {
                     Console.WriteLine($"{bb}");
                     Console.ReadLine();

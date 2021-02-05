@@ -20,9 +20,6 @@ namespace Model.Items
         private double _Multiplier;
         public double Multiplier { get => _Multiplier; set => _Multiplier = value; }
 
-        private AttackType _DamageType;
-        public AttackType DamageType { get => _DamageType; set => _DamageType = value; }
-
         protected BaseItem(string name, BigInteger basecost, BigInteger baseDamage)
         {
             Name = name;
@@ -30,7 +27,6 @@ namespace Model.Items
             BaseDamage = baseDamage;
             Quantity = 0;
             Multiplier = 1.2;
-            DamageType = AttackType.IdleDamage;
         }
 
         public virtual BigInteger GetSinglePurchaseCost()
@@ -72,7 +68,7 @@ namespace Model.Items
             return (BigInteger)result;
         }
 
-        public virtual int GetMaxNumberOfUpgrades(BigInteger coins)
+        public virtual int GetMaxNumberOfItems(BigInteger coins)
         {
             BigInteger singleCost = GetSinglePurchaseCost();
             if (singleCost > coins)
