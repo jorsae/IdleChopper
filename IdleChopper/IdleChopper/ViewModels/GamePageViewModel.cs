@@ -28,17 +28,21 @@ namespace IdleChopper.Views
 
         public Command LogClickCommand { get; }
         public Command BuyAxeCommand { get; }
+        public Command BuyWoodTruckCommand { get; }
 
         public GamePageViewModel()
         {
             LogClickCommand = new Command(LogClickCommandClicked);
             BuyAxeCommand = new Command(BuyAxeCommandClicked);
+            BuyWoodTruckCommand = new Command(BuyWoodTruckCommandClicked);
             GameTick.Elapsed += GameTick_Elapsed;
+            GameTick.Start();
         }
 
         private void GameTick_Elapsed(object sender, ElapsedEventArgs e)
         {
             Console.WriteLine("GameTick_Elapsed");
+            Logs += itemController.IdleDamage;
         }
 
         private void LogClickCommandClicked(object obj)
@@ -50,6 +54,11 @@ namespace IdleChopper.Views
         private void BuyAxeCommandClicked(object obj)
         {
             itemController.AddItem("Axe", 1);
+        }
+
+        private void BuyWoodTruckCommandClicked(object obj)
+        {
+            itemController.AddItem("Wood Truck", 1);
         }
 
         // Create the OnPropertyChanged method to raise the event

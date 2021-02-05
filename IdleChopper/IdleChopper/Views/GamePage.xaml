@@ -14,13 +14,16 @@
                 <Label Text="{x:Binding Logs, Mode=OneWay, UpdateSourceEventName=PropertyChanged}"/>
             </StackLayout>
 
-            <Button Text="Logs +1"
+            <Button Text="Chop wood"
                     VerticalOptions="CenterAndExpand" 
                     HorizontalOptions="CenterAndExpand"
                     Command="{x:Binding LogClickCommand, Mode=OneWay}"/>
 
             <Button Text="Buy Axe" 
                     Command="{x:Binding BuyAxeCommand, Mode=OneWay}"
+                    />
+            <Button Text="Buy Wood Truck" 
+                    Command="{x:Binding BuyWoodTruckCommand, Mode=OneWay}"
                     />
         </StackLayout>
     </ContentPage.Content>
