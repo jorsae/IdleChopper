@@ -1,6 +1,7 @@
 ﻿
 using Model.Items;
 using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Numerics;
 using System.Runtime.CompilerServices;
@@ -26,17 +27,32 @@ namespace IdleChopper.Views
             }
         }
 
+        private ObservableCollection<BaseItem> _ObservableBaseItems;
+        public ObservableCollection<BaseItem> ObservableBaseItems
+        {
+            get => _ObservableBaseItems;
+            set
+            {
+                _ObservableBaseItems = value;
+                OnPropertyChanged();
+            }
+        }
+
         public Command LogClickCommand { get; }
-        public Command BuyAxeCommand { get; }
-        public Command BuyWoodTruckCommand { get; }
+        public Command BuyItemCommand { get; }
 
         public GamePageViewModel()
         {
             LogClickCommand = new Command(LogClickCommandClicked);
-            BuyAxeCommand = new Command(BuyAxeCommandClicked);
-            BuyWoodTruckCommand = new Command(BuyWoodTruckCommandClicked);
+            BuyItemCommand = new Command(BuyItemCommandClicked);
             GameTick.Elapsed += GameTick_Elapsed;
-            GameTick.Start();
+            //GameTick.Start();
+
+            ObservableBaseItems = new ObservableCollection<BaseItem>
+            {
+                itemController.Items["Axe"],
+                itemController.Items["Wood Truck"]
+            };
         }
 
         private void GameTick_Elapsed(object sender, ElapsedEventArgs e)
@@ -45,20 +61,15 @@ namespace IdleChopper.Views
             Logs += itemController.IdleDamage;
         }
 
+        private void BuyItemCommandClicked(object obj)
+        {
+            Console.WriteLine($"BuyItemCommand_Clicked: {obj}");
+        }
+
         private void LogClickCommandClicked(object obj)
         {
             Logs += itemController.ClickDamage;
             Console.WriteLine($"Clicked log. Logs: {Logs}");
-        }
-
-        private void BuyAxeCommandClicked(object obj)
-        {
-            itemController.AddItem("Axe", 1);
-        }
-
-        private void BuyWoodTruckCommandClicked(object obj)
-        {
-            itemController.AddItem("Wood Truck", 1);
         }
 
         // Create the OnPropertyChanged method to raise the event

@@ -6,25 +6,40 @@
         <StackLayout>
             <StackLayout Orientation="Horizontal" >
                 <Label Text="Coins: "/>
-                <Label Text="{x:Binding Coins, Mode=OneWay, UpdateSourceEventName=PropertyChanged}"/>
+                <Label Text="{Binding Coins, Mode=OneWay, UpdateSourceEventName=PropertyChanged}"/>
             </StackLayout>
 
             <StackLayout Orientation="Horizontal" >
                 <Label Text="Logs: "/>
-                <Label Text="{x:Binding Logs, Mode=OneWay, UpdateSourceEventName=PropertyChanged}"/>
+                <Label Text="{Binding Logs, Mode=OneWay, UpdateSourceEventName=PropertyChanged}"/>
             </StackLayout>
 
             <Button Text="Chop wood"
                     VerticalOptions="CenterAndExpand" 
                     HorizontalOptions="CenterAndExpand"
-                    Command="{x:Binding LogClickCommand, Mode=OneWay}"/>
+                    Command="{Binding LogClickCommand, Mode=OneWay}"/>
 
-            <Button Text="Buy Axe" 
-                    Command="{x:Binding BuyAxeCommand, Mode=OneWay}"
+            <Button Text="Test BuyItemCommand"
+                    VerticalOptions="CenterAndExpand" 
+                    HorizontalOptions="CenterAndExpand"
+                    Command="{Binding BuyItemCommand, Mode=OneWay}"
+                    CommandParameter="{Binding Name}"
                     />
-            <Button Text="Buy Wood Truck" 
-                    Command="{x:Binding BuyWoodTruckCommand, Mode=OneWay}"
-                    />
+
+            <ListView x:Name="ListViewList" ItemsSource="{Binding ObservableBaseItems}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout>
+                                <Button Text="{Binding Name}"
+                                        Command="{Binding BindingContext.BuyItemCommand, Mode=OneWay, Source={x:Reference ListViewList}}"
+                                        CommandParameter="{Binding Name}"
+                                        />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
