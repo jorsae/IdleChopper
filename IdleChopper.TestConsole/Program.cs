@@ -12,32 +12,21 @@ namespace IdleChopper.TestConsole
     {
         static void Main(string[] args)
         {
-            Axe axe = new Axe();
-            WoodTruck woodTruck = new WoodTruck();
+            ItemController ic = new ItemController();
 
-            Dictionary<string, BaseItem> Items = new Dictionary<string, BaseItem>
-            {
-                { axe.Name, axe },
-                { woodTruck.Name, woodTruck }
-            };
+            ic.CalculateClickDamage();
+            Console.WriteLine(ic.ClickDamage);
+            
+            ic.Items["Axe"].Quantity = 1;
+            
+            ic.CalculateClickDamage();
+            Console.WriteLine(ic.ClickDamage);
 
-            foreach(var (itemName, item) in Items)
-            {
-                if(item is BaseClickItem)
-                {
-                    Console.WriteLine($"ClickItem {itemName}: {item.BaseDamage}");
-                }
-                if(item is BaseIdleItem)
-                {
-                    Console.WriteLine($"IdleItem  {itemName}: {item.BaseDamage}");
-                }
-            }
+            Console.WriteLine(ic.IdleDamage);
+            ic.Items["Wood Truck"].Quantity = 1;
+            ic.CalculateIdleDamage();
+            Console.WriteLine(ic.IdleDamage);
 
-            Console.WriteLine(Items["Axe"].GetType());
-
-
-            Console.WriteLine("Classes");
-            Console.WriteLine();
         }
         static void CostTest()
         {

@@ -35,10 +35,42 @@ namespace Model.Items
                 if (t.BaseType == tClick ||
                     t.BaseType == tIdle)
                 {
-                    BaseItem o = (BaseItem)Activator.CreateInstance(t);
-                    Items.Add(o.Name, o);
+                    BaseItem baseItem = (BaseItem)Activator.CreateInstance(t);
+                    Items.Add(baseItem.Name, baseItem);
                 }
             }
+        }
+
+        public void CalculateClickDamage()
+        {
+            List<BaseItem> baseClickItems = Items
+                                                .Select(item => item.Value)
+                                                .Where(i => i.GetType().BaseType == typeof(BaseClickItem))
+                                                .ToList();
+            
+            BigInteger newClickDamage = 0;
+            foreach (var item in baseClickItems)
+            {
+                BaseClickItem bci = (BaseClickItem)item;
+                newClickDamage += bci.GetClickDamage();
+            }
+            ClickDamage = newClickDamage;
+        }
+
+        public void CalculateIdleDamage()
+        {
+            List<BaseItem> baseClickItems = Items
+                                                .Select(item => item.Value)
+                                                .Where(i => i.GetType().BaseType == typeof(BaseIdleItem))
+                                                .ToList();
+
+            BigInteger newIdleDamage = 0;
+            foreach (var item in baseClickItems)
+            {
+                BaseIdleItem bci = (BaseIdleItem)item;
+                newIdleDamage += bci.GetIdleDamage();
+            }
+            IdleDamage = newIdleDamage;
         }
     }
 }
