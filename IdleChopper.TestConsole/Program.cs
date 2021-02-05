@@ -14,19 +14,7 @@ namespace IdleChopper.TestConsole
         {
             ItemController ic = new ItemController();
 
-            ic.CalculateClickDamage();
-            Console.WriteLine(ic.ClickDamage);
-            
-            ic.Items["Axe"].Quantity = 1;
-            
-            ic.CalculateClickDamage();
-            Console.WriteLine(ic.ClickDamage);
-
-            Console.WriteLine(ic.IdleDamage);
-            ic.Items["Wood Truck"].Quantity = 1;
-            ic.CalculateIdleDamage();
-            Console.WriteLine(ic.IdleDamage);
-
+            ic.AddItem("Axe", 3);
         }
         static void CostTest()
         {

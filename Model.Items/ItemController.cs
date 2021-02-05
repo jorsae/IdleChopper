@@ -22,6 +22,31 @@ namespace Model.Items
             this.FillItems();
         }
 
+        public bool AddItem(string itemName, int quantity)
+        {
+            bool gotItem = Items.TryGetValue(itemName, out BaseItem baseItem);
+            if (!gotItem)
+                return false;
+            
+            baseItem.Quantity = quantity;
+
+            if(baseItem.GetType().BaseType == typeof(BaseClickItem))
+            {
+                BaseClickItem baseClickItem = (BaseClickItem)baseItem;
+                BigInteger oldDamage = baseClickItem.GetClickDamage();
+                baseClickItem.Quantity += quantity;
+                this.ClickDamage += baseClickItem.GetClickDamage() - oldDamage;
+            }
+            else
+            {
+                BaseIdleItem baseIdleItem = (BaseIdleItem)baseItem;
+                BigInteger oldDamage = baseIdleItem.GetIdleDamage();
+                baseIdleItem.Quantity += quantity;
+                this.IdleDamage += baseIdleItem.GetIdleDamage() - oldDamage;
+            }
+            return true;
+        }
+
         private void FillItems()
         {
             Type tClick = typeof(BaseClickItem);

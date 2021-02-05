@@ -49,8 +49,7 @@ namespace IdleChopper.Views
 
         private void BuyAxeCommandClicked(object obj)
         {
-            itemController.Items["Axe"].Quantity += 1;
-            itemController.CalculateClickDamage();
+            itemController.AddItem("Axe", 1);
         }
 
         // Create the OnPropertyChanged method to raise the event
