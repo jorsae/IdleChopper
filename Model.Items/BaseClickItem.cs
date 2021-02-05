@@ -7,7 +7,6 @@ namespace Model.Items
         protected BaseClickItem(string name, BigInteger basecost, BigInteger baseDamage)
                                 : base(name, basecost, baseDamage)
         {
-
         }
 
         public BigInteger GetClickDamage()

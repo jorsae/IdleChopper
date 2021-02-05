@@ -1,7 +1,10 @@
-﻿using Model.Items;
+﻿using Microsoft.VisualBasic.CompilerServices;
+using Model.Items;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
+using System.Reflection;
 
 namespace IdleChopper.TestConsole
 {
@@ -31,8 +34,11 @@ namespace IdleChopper.TestConsole
             }
 
             Console.WriteLine(Items["Axe"].GetType());
-        }
 
+
+            Console.WriteLine("Classes");
+            Console.WriteLine();
+        }
         static void CostTest()
         {
             Axe axe = new Axe();
