@@ -28,8 +28,6 @@ namespace Model.Items
             if (!gotItem)
                 return false;
             
-            baseItem.Quantity = quantity;
-
             if(baseItem.GetType().BaseType == typeof(BaseClickItem))
             {
                 BaseClickItem baseClickItem = (BaseClickItem)baseItem;

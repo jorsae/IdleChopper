@@ -3,6 +3,7 @@ using Model.Items;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Timers;
@@ -46,30 +47,34 @@ namespace IdleChopper.Views
             LogClickCommand = new Command(LogClickCommandClicked);
             BuyItemCommand = new Command(BuyItemCommandClicked);
             GameTick.Elapsed += GameTick_Elapsed;
-            //GameTick.Start();
+            GameTick.Start();
 
-            ObservableBaseItems = new ObservableCollection<BaseItem>
+            ObservableBaseItems = new ObservableCollection<BaseItem>();
+            foreach (BaseItem baseItem in itemController.Items.Select(i => i.Value))
             {
-                itemController.Items["Axe"],
-                itemController.Items["Wood Truck"]
-            };
+                ObservableBaseItems.Add(baseItem);
+            }
         }
 
         private void GameTick_Elapsed(object sender, ElapsedEventArgs e)
         {
-            Console.WriteLine("GameTick_Elapsed");
             Logs += itemController.IdleDamage;
         }
 
         private void BuyItemCommandClicked(object obj)
         {
-            Console.WriteLine($"BuyItemCommand_Clicked: {obj}");
+            string itemName = obj.ToString();
+            bool addedItem = itemController.AddItem(itemName, 1);
+            if (addedItem)
+            {
+                BaseItem item = ObservableBaseItems.Where(i => i.Name == itemName).First();
+                item.Quantity = itemController.Items[itemName].Quantity;
+            }
         }
 
         private void LogClickCommandClicked(object obj)
         {
             Logs += itemController.ClickDamage;
-            Console.WriteLine($"Clicked log. Logs: {Logs}");
         }
 
         // Create the OnPropertyChanged method to raise the event

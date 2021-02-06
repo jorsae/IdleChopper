@@ -1,9 +1,11 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 
 namespace Model.Items
 {
-    public abstract class BaseItem : IItem
+    public abstract class BaseItem : IItem, INotifyPropertyChanged
     {
         private String _Name;
         public string Name { get => _Name; set => _Name = value; }
@@ -15,9 +17,20 @@ namespace Model.Items
         public BigInteger BaseDamage { get => _BaseDamage; set => _BaseDamage = value; }
 
         private int _Quantity;
-        public int Quantity { get => _Quantity; set => _Quantity = value; }
+        public int Quantity
+        {
+            get => _Quantity;
+            set
+            {
+                _Quantity = value;
+                OnPropertyChanged();
+            }
+        }
 
         private double _Multiplier;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public double Multiplier { get => _Multiplier; set => _Multiplier = value; }
 
         protected BaseItem(string name, BigInteger basecost, BigInteger baseDamage)
@@ -27,6 +40,11 @@ namespace Model.Items
             BaseDamage = baseDamage;
             Quantity = 0;
             Multiplier = 1.2;
+        }
+
+        public string GetQuantity()
+        {
+            return Quantity.ToString();
         }
 
         public virtual BigInteger GetSinglePurchaseCost()
@@ -91,6 +109,13 @@ namespace Model.Items
                                               (BigInteger)(uint)bits[0]);
             BigInteger denominator = BigInteger.Pow(10, (bits[3] >> 16) & 0xff);
             return (numerator, denominator);
+        }
+
+        // Create the OnPropertyChanged method to raise the event
+        // The calling member's name will be used as the parameter.
+        protected void OnPropertyChanged([CallerMemberName] string name = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
     }
 }

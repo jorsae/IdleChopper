@@ -5,13 +5,21 @@
     <ContentPage.Content>
         <StackLayout>
             <StackLayout Orientation="Horizontal" >
-                <Label Text="Coins: "/>
-                <Label Text="{Binding Coins, Mode=OneWay, UpdateSourceEventName=PropertyChanged}"/>
+                <Label Text="Coins: "
+                       FontSize="Large"
+                       />
+                <Label Text="{Binding Coins, Mode=OneWay, UpdateSourceEventName=PropertyChanged}"
+                       FontSize="Large"
+                       />
             </StackLayout>
 
             <StackLayout Orientation="Horizontal" >
-                <Label Text="Logs: "/>
-                <Label Text="{Binding Logs, Mode=OneWay, UpdateSourceEventName=PropertyChanged}"/>
+                <Label Text="Logs: "
+                       FontSize="Large"
+                       />
+                <Label Text="{Binding Logs, Mode=OneWay, UpdateSourceEventName=PropertyChanged}"
+                       FontSize="Large"
+                       />
             </StackLayout>
 
             <Button Text="Chop wood"
@@ -19,19 +27,16 @@
                     HorizontalOptions="CenterAndExpand"
                     Command="{Binding LogClickCommand, Mode=OneWay}"/>
 
-            <Button Text="Test BuyItemCommand"
-                    VerticalOptions="CenterAndExpand" 
-                    HorizontalOptions="CenterAndExpand"
-                    Command="{Binding BuyItemCommand, Mode=OneWay}"
-                    CommandParameter="{Binding Name}"
-                    />
-
             <ListView x:Name="ListViewList" ItemsSource="{Binding ObservableBaseItems}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout>
-                                <Button Text="{Binding Name}"
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="{Binding Name}"
+                                       FontSize="Large"
+                                       VerticalTextAlignment="Center"
+                                       />
+                                <Button Text="{Binding Quantity, Mode=OneWay}"
                                         Command="{Binding BindingContext.BuyItemCommand, Mode=OneWay, Source={x:Reference ListViewList}}"
                                         CommandParameter="{Binding Name}"
                                         />
