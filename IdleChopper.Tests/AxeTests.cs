@@ -15,6 +15,16 @@ namespace IdleChopper.Tests
             axe = new Axe();
         }
 
+        [Test]
+        public void Should_SetPropertiesInConstructor()
+        {
+            Assert.AreEqual("Axe", axe.Name);
+            Assert.AreEqual(new BigInteger(10), axe.Basecost);
+            Assert.AreEqual(new BigInteger(1), axe.BaseDamage);
+            Assert.AreEqual(1.2, axe.Multiplier);
+            Assert.AreEqual(0, axe.Quantity);
+        }
+
         [TestCaseSource("Should_GetSinglePurchaseCost_TestCases")]
         public void Should_GetSinglePurchaseCost(int quantity, BigInteger expectedCost)
         {
