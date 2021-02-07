@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Model.Game\Model.Game.csproj" />
     <ProjectReference Include="..\..\Model.Items\Model.Items.csproj" />
   </ItemGroup>
 

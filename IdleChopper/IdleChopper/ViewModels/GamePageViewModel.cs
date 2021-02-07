@@ -1,6 +1,6 @@
 ﻿
+using Model.Game;
 using Model.Items;
-using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -16,7 +16,8 @@ namespace IdleChopper.Views
         public event PropertyChangedEventHandler PropertyChanged;
         private ItemController itemController = new ItemController();
         private Timer GameTick = new Timer(100);
-        private Timer CoinTick = new Timer(1000);
+        public Timer CoinTick = new Timer(1000);
+        public CoinMarket coinMarket = new CoinMarket();
 
         private BigInteger _Coins;
         public BigInteger Coins

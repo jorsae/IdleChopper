@@ -22,6 +22,11 @@
                        />
             </StackLayout>
 
+            <Slider Maximum="100"
+                    Minimum="1"
+                    ValueChanged="Slider_ValueChanged"
+                    />
+
             <Button Text="Chop wood"
                     VerticalOptions="CenterAndExpand" 
                     HorizontalOptions="CenterAndExpand"
