@@ -5,7 +5,7 @@ using System.Numerics;
 
 namespace IdleChopper.Tests
 {
-    public class Tests
+    public class AxeTests
     {
         private Axe axe;
 
@@ -84,5 +84,16 @@ namespace IdleChopper.Tests
             }
         }
 
+        [TestCase("Click Damage: 0", 0)]
+        [TestCase("Click Damage: 1", 1)]
+        [TestCase("Click Damage: 2", 2)]
+        [TestCase("Click Damage: 10", 10)]
+        [TestCase("Click Damage: 100", 100)]
+        [TestCase("Click Damage: 1139", 1139)]
+        public void Should_GetDamageForUI(string expected, int axeQuantity)
+        {
+            axe.Quantity = axeQuantity;
+            Assert.AreEqual(expected, axe.GetDamageForUI);
+        }
     }
 }

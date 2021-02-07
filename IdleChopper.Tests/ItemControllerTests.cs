@@ -24,7 +24,7 @@ namespace IdleChopper.Tests
         public void Should_AddItem()
         {
             Assert.IsTrue(itemController.AddItem("Axe", 1));
-            Assert.IsTrue(itemController.AddItem("Wood Truck", 50));
+            Assert.IsTrue(itemController.AddItem("Helping Axe", 50));
         }
 
         [Test]
@@ -47,16 +47,16 @@ namespace IdleChopper.Tests
         {
             itemController.AddItem("notanditem", 1);
             Assert.AreEqual(new BigInteger(0), itemController.ClickDamage);
-            itemController.AddItem("Wood Truck", 1);
+            itemController.AddItem("Helping Axe", 1);
             Assert.AreEqual(new BigInteger(0), itemController.ClickDamage);
         }
 
         [Test]
         public void Should_IncreaseIdleDamage_WhenAddingIdleItem()
         {
-            itemController.AddItem("Wood Truck", 1);
+            itemController.AddItem("Helping Axe", 1);
             Assert.AreEqual(new BigInteger(1), itemController.IdleDamage);
-            itemController.AddItem("Wood Truck", 6);
+            itemController.AddItem("Helping Axe", 6);
             Assert.AreEqual(new BigInteger(7), itemController.IdleDamage);
         }
 
