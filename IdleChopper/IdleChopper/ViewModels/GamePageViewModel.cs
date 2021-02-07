@@ -73,8 +73,8 @@ namespace IdleChopper.Views
 
         private void CoinTick_Elapsed(object sender, ElapsedEventArgs e)
         {
-            Logs -= 1;
-            Coins += 1;
+            Coins += coinMarket.CoinsPerTick;
+            Logs -= coinMarket.LogsPerTick;
         }
 
         private void GameTick_Elapsed(object sender, ElapsedEventArgs e)

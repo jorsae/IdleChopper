@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using System;
+using Xamarin.Forms;
 
 namespace IdleChopper.Views
 {
@@ -12,9 +13,11 @@ namespace IdleChopper.Views
             this.BindingContext = gamePageViewModel;
         }
 
-        private void Slider_ValueChanged(object sender, ValueChangedEventArgs e)
+        private void Slider_DragCompleted(object sender, System.EventArgs e)
         {
-            gamePageViewModel.coinMarket.SliderValue = e.NewValue;
+            Slider s = sender as Slider;
+            gamePageViewModel.coinMarket.SliderValue = s.Value;
+            Console.WriteLine($"Slider_DragCompleted: {s.Value}");
             gamePageViewModel.CoinTick.Interval = gamePageViewModel.coinMarket.TickInterval;
         }
     }
