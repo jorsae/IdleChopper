@@ -16,6 +16,18 @@ namespace IdleChopper.Views
         public event PropertyChangedEventHandler PropertyChanged;
         private ItemController itemController = new ItemController();
         private Timer GameTick = new Timer(100);
+        private Timer CoinTick = new Timer(1000);
+
+        private BigInteger _Coins;
+        public BigInteger Coins
+        {
+            get => _Coins;
+            set
+            {
+                _Coins = value;
+                OnPropertyChanged();
+            }
+        }
 
         private BigInteger _Logs;
         public BigInteger Logs
@@ -48,12 +60,20 @@ namespace IdleChopper.Views
             BuyItemCommand = new Command(BuyItemCommandClicked);
             GameTick.Elapsed += GameTick_Elapsed;
             GameTick.Start();
+            CoinTick.Elapsed += CoinTick_Elapsed;
+            CoinTick.Start();
 
             ObservableBaseItems = new ObservableCollection<BaseItem>();
             foreach (BaseItem baseItem in itemController.Items.Select(i => i.Value))
             {
                 ObservableBaseItems.Add(baseItem);
             }
+        }
+
+        private void CoinTick_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            Logs -= 1;
+            Coins += 1;
         }
 
         private void GameTick_Elapsed(object sender, ElapsedEventArgs e)
