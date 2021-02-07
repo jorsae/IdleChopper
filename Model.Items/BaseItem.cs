@@ -5,8 +5,18 @@ using System.Runtime.CompilerServices;
 
 namespace Model.Items
 {
-    public abstract class BaseItem : IItem, INotifyPropertyChanged
+    public abstract class BaseItem : IBaseItem, INotifyPropertyChanged
     {
+        #region UI Properties
+        public event PropertyChangedEventHandler PropertyChanged;
+        public virtual string GetDamageForUI
+        {
+            get => "N/A";
+            set { OnPropertyChanged(); }
+        }
+
+        #endregion
+
         private String _Name;
         public string Name { get => _Name; set => _Name = value; }
 
@@ -28,9 +38,6 @@ namespace Model.Items
         }
 
         private double _Multiplier;
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
         public double Multiplier { get => _Multiplier; set => _Multiplier = value; }
 
         protected BaseItem(string name, BigInteger basecost, BigInteger baseDamage)
@@ -40,11 +47,6 @@ namespace Model.Items
             BaseDamage = baseDamage;
             Quantity = 0;
             Multiplier = 1.2;
-        }
-
-        public string GetQuantity()
-        {
-            return Quantity.ToString();
         }
 
         public virtual BigInteger GetSinglePurchaseCost()

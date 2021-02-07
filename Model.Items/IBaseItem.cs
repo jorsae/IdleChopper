@@ -2,8 +2,9 @@
 
 namespace Model.Items
 {
-    public interface IItem
+    public interface IBaseItem
     {
+        string GetDamageForUI { get; set; }
         BigInteger GetSinglePurchaseCost();
         BigInteger GetBulkPurchaseCost(int quantity);
         int GetMaxNumberOfItems(BigInteger coins);

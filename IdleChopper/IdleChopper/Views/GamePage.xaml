@@ -35,11 +35,18 @@
                                 <Label Text="{Binding Name}"
                                        FontSize="Large"
                                        VerticalTextAlignment="Center"
+                                       HorizontalTextAlignment="Center"
                                        />
                                 <Button Text="{Binding Quantity, Mode=OneWay}"
                                         Command="{Binding BindingContext.BuyItemCommand, Mode=OneWay, Source={x:Reference ListViewList}}"
                                         CommandParameter="{Binding Name}"
                                         />
+
+                                <Label Text="{Binding GetDamageForUI, Mode=OneWay}"
+                                       FontSize="Medium"
+                                       VerticalTextAlignment="Center"
+                                       HorizontalTextAlignment="Center"
+                                       />
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>

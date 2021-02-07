@@ -69,6 +69,7 @@ namespace IdleChopper.Views
             {
                 BaseItem item = ObservableBaseItems.Where(i => i.Name == itemName).First();
                 item.Quantity = itemController.Items[itemName].Quantity;
+                item.GetDamageForUI = "N/A";
             }
         }
 
