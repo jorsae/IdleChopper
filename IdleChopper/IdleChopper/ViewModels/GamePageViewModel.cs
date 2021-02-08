@@ -1,6 +1,7 @@
 ﻿
 using Model.Game;
 using Model.Items;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -69,12 +70,16 @@ namespace IdleChopper.Views
             {
                 ObservableBaseItems.Add(baseItem);
             }
+            Coins = 10;
         }
 
         private void CoinTick_Elapsed(object sender, ElapsedEventArgs e)
         {
-            Coins += coinMarket.CoinsPerTick;
-            Logs -= coinMarket.LogsPerTick;
+            if(Logs > coinMarket.LogsPerTick)
+            {
+                Coins += coinMarket.CoinsPerTick;
+                Logs -= coinMarket.LogsPerTick;
+            }
         }
 
         private void GameTick_Elapsed(object sender, ElapsedEventArgs e)
@@ -85,13 +90,21 @@ namespace IdleChopper.Views
         private void BuyItemCommandClicked(object obj)
         {
             string itemName = obj.ToString();
-            bool addedItem = itemController.AddItem(itemName, 1);
-            if (addedItem)
+            BaseItem item = itemController.Items.Select(i => i.Value).Where(i => i.Name == itemName).First();
+            BigInteger cost = item.GetSinglePurchaseCost();
+            Console.WriteLine($"{item.Name}: {item.Quantity} | c:{cost}");
+            Console.WriteLine($"logs/t:{coinMarket.LogsPerTick}, coins/t: {coinMarket.CoinsPerTick}, tick:{coinMarket.TickInterval}ms");
+            if(Coins >= cost)
             {
-                BaseItem item = ObservableBaseItems.Where(i => i.Name == itemName).First();
-                item.Quantity = itemController.Items[itemName].Quantity;
-                item.GetDamageForUI = "N/A";
+                bool addedItem = itemController.AddItem(itemName, 1);
+                if (addedItem)
+                {
+                    Coins -= cost;
+                    item.Quantity = itemController.Items[itemName].Quantity;
+                    item.GetDamageForUI = "N/A";// Update UI
+                }
             }
+            
         }
 
         private void LogClickCommandClicked(object obj)

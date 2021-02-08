@@ -25,7 +25,6 @@
             <Slider Maximum="100"
                     Minimum="1"
                     DragCompleted="Slider_DragCompleted"
-                    Rotation="180"
                     />
 
             <Button Text="Chop wood"

@@ -34,9 +34,9 @@ namespace Model.Game
 
         public void SetMarketPrice()
         {
-            TickInterval = (int)Math.Ceiling(SliderValue * 10);
-            CoinsPerTick = 1;
-            LogsPerTick = (int)SliderValue;
+            TickInterval = 1100 - (int)(SliderValue * 10);
+            CoinsPerTick = (BigInteger)SliderValue * (BigInteger)Math.Pow(2, SliderValue);
+            LogsPerTick = (BigInteger)SliderValue * (BigInteger)Math.Pow(4, SliderValue);
         }
 
         // Create the OnPropertyChanged method to raise the event
