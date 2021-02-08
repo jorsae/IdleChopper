@@ -66,11 +66,13 @@ namespace IdleChopper.Views
             CoinTick.Start();
 
             ObservableBaseItems = new ObservableCollection<BaseItem>();
-            foreach (BaseItem baseItem in itemController.Items.Select(i => i.Value))
+            foreach (BaseItem baseItem in itemController.Items
+                                                        .Select(i => i.Value)
+                                                        .OrderBy(i => i.Basecost))
             {
                 ObservableBaseItems.Add(baseItem);
             }
-            Coins = 10;
+            Coins = 10; // Temporary start with 10coins, to buy an Axe
         }
 
         private void CoinTick_Elapsed(object sender, ElapsedEventArgs e)
