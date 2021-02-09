@@ -1,23 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="IdleChopper.Views.GamePage">
+             x:Class="IdleChopper.Views.GamePage"
+             x:Subclass="IdleChopper.Views.GamePageViewModel"
+             >
     <ContentPage.Content>
         <StackLayout>
-            <StackLayout Orientation="Horizontal" >
-                <Label Text="Coins: "
-                       FontSize="Large"
-                       />
-                <Label Text="{Binding Coins, Mode=OneWay, UpdateSourceEventName=PropertyChanged}"
+            <StackLayout Orientation="Horizontal">
+                <Label Text="{Binding Coins, Mode=OneWay, UpdateSourceEventName=PropertyChanged, StringFormat='Coins: {0}'}"
                        FontSize="Large"
                        />
             </StackLayout>
 
             <StackLayout Orientation="Horizontal" >
-                <Label Text="Logs: "
-                       FontSize="Large"
-                       />
-                <Label Text="{Binding Logs, Mode=OneWay, UpdateSourceEventName=PropertyChanged}"
+                <Label Text="{Binding Logs, Mode=OneWay, UpdateSourceEventName=PropertyChanged, StringFormat='Logs: {0}'}"
                        FontSize="Large"
                        />
             </StackLayout>
@@ -26,6 +22,14 @@
                     Minimum="1"
                     DragCompleted="Slider_DragCompleted"
                     />
+
+            <Label Text="{Binding Path=MarketPrice, Mode=OneWay, UpdateSourceEventName=PropertyChanged}"
+                   FontSize="Large"
+                   />
+            
+            <Label Text="{Binding Path=MarketPrice, Mode=OneWay, UpdateSourceEventName=PropertyChanged}"
+                   FontSize="Large"
+                   />
 
             <Button Text="Chop wood"
                     VerticalOptions="CenterAndExpand" 
@@ -42,6 +46,7 @@
                                        VerticalTextAlignment="Center"
                                        HorizontalTextAlignment="Center"
                                        />
+                                
                                 <Button Text="{Binding Quantity, Mode=OneWay}"
                                         Command="{Binding BindingContext.BuyItemCommand, Mode=OneWay, Source={x:Reference ListViewList}}"
                                         CommandParameter="{Binding Name}"

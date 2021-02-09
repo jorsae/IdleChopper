@@ -96,6 +96,7 @@ namespace IdleChopper.Views
             BigInteger cost = item.GetSinglePurchaseCost();
             Console.WriteLine($"{item.Name}: {item.Quantity} | c:{cost}");
             Console.WriteLine($"logs/t:{coinMarket.LogsPerTick}, coins/t: {coinMarket.CoinsPerTick}, tick:{coinMarket.TickInterval}ms");
+            Console.WriteLine($"coinMarket.MarketPrice: {coinMarket.MarketPrice}");
             if(Coins >= cost)
             {
                 bool addedItem = itemController.AddItem(itemName, 1);

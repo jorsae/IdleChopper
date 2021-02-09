@@ -17,8 +17,8 @@ namespace IdleChopper.Views
         {
             Slider s = sender as Slider;
             gamePageViewModel.coinMarket.SliderValue = s.Value;
-            Console.WriteLine($"Slider_DragCompleted: {s.Value}");
             gamePageViewModel.CoinTick.Interval = gamePageViewModel.coinMarket.TickInterval;
+            Console.WriteLine($"Slider_DragCompleted: {s.Value}");
         }
     }
 }
