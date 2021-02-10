@@ -2,6 +2,6 @@
 {
     public class Chainsaw : BaseIdleItem
     {
-        public Chainsaw() : base("Chainsaw", 250, 3) { }
+        public Chainsaw() : base("Chainsaw", 1000, 6) { }
     }
 }
