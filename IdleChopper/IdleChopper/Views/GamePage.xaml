@@ -35,7 +35,7 @@
                     VerticalOptions="CenterAndExpand" 
                     HorizontalOptions="CenterAndExpand"
                     Command="{Binding LogClickCommand, Mode=OneWay}"/>
-
+            
             <ListView x:Name="ListViewList" ItemsSource="{Binding ObservableBaseItems}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -62,6 +62,18 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <StackLayout Orientation="Horizontal">
+                <!-- 
+                    Radio button text will not show:
+                        https://github.com/xamarin/Xamarin.Forms/issues/11700
+                    TL;DR: RadioButton will be updated, so not gonna fix it till XF: 5.0
+                
+                -->
+                <RadioButton Margin="10" Text="1"/>
+                <RadioButton Text="10"/>
+                <RadioButton Text="50"/>
+                <RadioButton Text="Max"/>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
