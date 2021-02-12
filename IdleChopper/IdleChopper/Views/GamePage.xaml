@@ -69,10 +69,18 @@
                     TL;DR: RadioButton will be updated, so not gonna fix it till XF: 5.0
                 
                 -->
-                <RadioButton Margin="10" Text="1"/>
-                <RadioButton Text="10"/>
-                <RadioButton Text="50"/>
-                <RadioButton Text="Max"/>
+                <Button Text="1"
+                        Command="{Binding BuyItemQuantityCommand}"
+                        CommandParameter="1"/>
+                <Button Text="10"
+                        Command="{Binding BuyItemQuantityCommand}"
+                        CommandParameter="10"/>
+                <Button Text="50"
+                        Command="{Binding BuyItemQuantityCommand}"
+                        CommandParameter="50"/>
+                <Button Text="Max"
+                        Command="{Binding BuyItemQuantityCommand}"
+                        CommandParameter="max"/>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

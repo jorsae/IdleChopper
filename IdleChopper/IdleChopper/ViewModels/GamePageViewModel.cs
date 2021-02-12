@@ -55,11 +55,13 @@ namespace IdleChopper.Views
 
         public Command LogClickCommand { get; }
         public Command BuyItemCommand { get; }
+        public Command BuyItemQuantityCommand { get; }
 
         public GamePageViewModel()
         {
             LogClickCommand = new Command(LogClickCommandClicked);
             BuyItemCommand = new Command(BuyItemCommandClicked);
+            BuyItemQuantityCommand = new Command(BuyItemQuantityCommandClicked);
             GameTick.Elapsed += GameTick_Elapsed;
             GameTick.Start();
             CoinTick.Elapsed += CoinTick_Elapsed;
@@ -74,7 +76,6 @@ namespace IdleChopper.Views
             }
             Coins = 10; // Temporary start with 10coins, to buy an Axe
         }
-
         private void CoinTick_Elapsed(object sender, ElapsedEventArgs e)
         {
             if(Logs > coinMarket.LogsPerTick)
@@ -113,6 +114,12 @@ namespace IdleChopper.Views
         private void LogClickCommandClicked(object obj)
         {
             Logs += itemController.ClickDamage;
+        }
+
+        private void BuyItemQuantityCommandClicked(object obj)
+        {
+            string quantity = obj.ToString();
+            Console.WriteLine($"BuyItemQuantityCommandClicked: {quantity}");
         }
 
         // Create the OnPropertyChanged method to raise the event
